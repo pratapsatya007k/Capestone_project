@@ -60,3 +60,8 @@
     padding-top: 5px;
    background-color: rgb(236, 234, 234);
   }
+  .hint:hover{
+    border: none;
+    background-color: rgb(146, 144, 144);
+    font-weight: 600;
+  }

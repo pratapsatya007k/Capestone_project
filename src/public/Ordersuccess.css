@@ -1,0 +1,42 @@
+.ordersuccess-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+}
+
+.ordersuccess-content {
+    text-align: center;
+}
+
+.ordersuccess-image {
+    width: 200px;
+    height: 200px;
+}
+
+.ordersuccess-title {
+    font-size: 40px;
+    font-weight: 600;
+    color: #333;
+    margin-top: 20px;
+}
+
+.ordersuccess-message {
+    font-size: 35px;
+    font-weight: 600;
+    color: #333;
+    margin-top: 20px;
+}
+
+.brand-name {
+    color: #0a2384; /* Brand color */
+    font-weight: 800;
+}
+
+.ordersuccess-redirect {
+    font-size: 35px;
+    font-weight: 300;
+    color: #555;
+    margin-top: 15px;
+}

@@ -9,7 +9,7 @@ const Search = () => {
     const arr = ["fingerrings", "gold", "silver", "platinum", "earrings", "bangles", "necklace", "bracelets"];
     let redirectURL = "/home"; // Default redirection URL
     let found = false;
-    
+    if (val!=""){
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].includes(val)) {
         found = true;
@@ -25,10 +25,11 @@ const Search = () => {
         }
       }
     }
+  }else{
+    alert("Please Enter Something")
+  }
     if (found) {
       window.location.href = redirectURL;
-    } else {
-      alert("Sorry, no match found.");
     }
   }
   function navigation(url){
@@ -45,7 +46,7 @@ const Search = () => {
           value={searchValue} 
           onChange={(e) => setSearchValue(e.target.value)}
         />
-        <button id="searchbtn" onClick={onSubmit}></button>
+        <button id="searchbtn" htmlFor="searchbar" onClick={onSubmit}></button>
         <div id='hints'>
           <div className="hint" onClick={()=>navigation("gold/rings")}>Gold Rings</div>
           <div className="hint" onClick={()=>navigation("sliver")}>Silver</div>

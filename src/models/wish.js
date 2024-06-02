@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 
 const wishSchema = new mongoose.Schema({
-  itemid: { type: String, unique: true },
-  imgsrc: { type: String, unique: true },
+  itemid:String,
+  imgsrc: String,
   username: String,
-  item: String,
+  itemName: String,
+  itemType:String,
+  weight:String,
+  total:String
 });
 
-// Ensure indexes for uniqueness
-wishSchema.index({ itemid: 1 }, { unique: true });
-wishSchema.index({ imgsrc: 1 }, { unique: true });
 
 module.exports = mongoose.model("Wish", wishSchema);

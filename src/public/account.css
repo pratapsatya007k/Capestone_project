@@ -33,7 +33,10 @@
     /* list-style-type: decimal; */ /* This removes the numbering for ol */
   }
   #wishlist{
-    width: 650px;
+    width: 680px;
+    height: 520px;
+    /* background-color: aqua; */
+    overflow: scroll;
     margin-left: 400px;
     margin-top: 5px;
     border-radius: 10px;
@@ -41,6 +44,7 @@
     padding-left: 8px;
     padding-top: 2px;
     padding-bottom: 2px;
+
   }
   .wishitem {
     width: 630px;
@@ -59,14 +63,13 @@
     top:5px
   }
   .itemname {
-    font-size: 19px;
-    font-weight: 600;
-    font-size: 30px;
+    font-weight: 500;
+    font-size: 22px;
     cursor: pointer;
     position: absolute;
-    top: 34px;
+    top: 36px;
     text-transform: uppercase;
-    left: 160px;
+    left: 140px;
   }
   .add {
     width: 55px;
@@ -92,4 +95,14 @@
   }
   .delete:hover{
     background-color: rgb(190, 180, 180);
+  }
+  #details{
+    position:absolute;
+    right:25px;
+    top:41px;
+    color:rgb(43, 42, 42)
+  }
+  #details:hover{
+    text-decoration: underline;
+    cursor: pointer;
   }

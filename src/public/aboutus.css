@@ -1,0 +1,96 @@
+*{
+    cursor: pointer;
+}
+.aboutus-container {
+    padding: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin-top: 170px;
+  }
+  
+  .aboutus-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 36px;
+    color: #2c3e50;
+    font-weight: 700;
+  }
+  
+  .aboutus-container p {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 40px;
+    color: #34495e;
+    font-weight: 400;
+  }
+  
+  .quote-section {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .quote-section h2 {
+    font-size: 28px;
+    color: #e74c3c;
+    font-weight: 600;
+    font-style: italic;
+  }
+  
+  .quality-section {
+    text-align: center;
+    margin-bottom: 40px;
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .quality-section h2 {
+    font-size: 28px;
+    color: #27ae60;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .quality-section p {
+    font-size: 18px;
+    color: #2c3e50;
+    font-weight: 400;
+  }
+  
+  .jewellery-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+  
+  .jewellery-category {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .jewellery-category:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .jewellery-category h3 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #2980b9;
+    font-weight: 600;
+  }
+  
+  .jewellery-category p {
+    font-size: 16px;
+    color: #7f8c8d;
+    font-weight: 300;
+  }
+  

@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const Addcart = require("../models/addcart"); // Import your DataModel
+const Wish = require("../models/wish"); // Import your DataModel
 
 // POST route to insert data
-router.post('/cart', async (req, res) => {
+router.post('/insert', async (req, res) => {
   try {
-    const newItem = new Addcart({
+    const newItem = new Wish({
       itemid: req.body.itemid,
       itemName: req.body.itemName,
       imgsrc: req.body.imgsrc,
@@ -16,28 +16,28 @@ router.post('/cart', async (req, res) => {
     await newItem.save();
     res.status(201).send('Item saved successfully');
   } catch (error) {
-    res.status(500).send('Error saving item');
+    res.status(500).send(error.message);
   }
 });
 
 // GET route to fetch data
-router.get('/cart', async (req, res) => {
+router.get('/fetch', async (req, res) => { // Changed route path to /fetch
   const { key, value } = req.query;
   try {
-    const regex = new RegExp(`^${value}$`, 'i'); // Case insensitive match
-    const data = await Addcart.find({ [key]: regex });
+    const regex = new RegExp(`^${value}$`, 'i');
+    const data = await Wish.find({ [key]: regex }); // Corrected to use `Wish`
     res.json(data);
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send(err.message);
   }
 });
 
 // DELETE route to delete data
-router.delete('/cart', async (req, res) => {
+router.delete('/delete', async (req, res) => { // Changed route path to /delete
   const { key, value, username } = req.body;
   if (key === 'itemid' && value && username) {
     try {
-      const result = await Addcart.findOneAndDelete({ itemid: value, username: username });
+      const result = await Wish.findOneAndDelete({ itemid: value, username: username });
       if (result) {
         res.status(200).send('Item deleted');
       } else {

@@ -16,6 +16,7 @@ const Signup = () => {
         if (response.data) {
           // Redirect to home page
           window.location.href="/home"
+          localStorage.setItem("username",username)
         } else {
           // Handle error case if needed
           console.error("Signup failed");

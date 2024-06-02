@@ -162,12 +162,12 @@
 }
 @keyframes text-spin {
   0%{
-    color: #0a2384;   
+    color: #f3ef11;   
   }
   10%{
     color: #f3ef11;
   }
-  30%{
+  15%{
     color: #0a2384;
   }
   100% {
@@ -177,7 +177,7 @@
 #homemain{ 
   position: relative;
 }
-#homeimg {
+#homeimage {
   background-color: white;
   outline: 2px solid black;
   width: 1400px;
@@ -185,7 +185,7 @@
   display: flex;
   overflow: hidden;
   position: absolute;
-  top:5px;
+  top:85px;
   left: 45px;
   box-shadow: 2px 2px 2px black;
 }

@@ -7,7 +7,7 @@ main {
   grid-template-columns: 300px 300px 300px;
   grid-template-rows: 300px 100px 300px 100px 300px 100px;
   grid-gap: 20px 80px;
-  margin-top: 180px;
+  margin-top: 100px;
   padding-left: 220px;
   padding-top: 50px;
   background-color: white;
@@ -174,21 +174,18 @@ main {
   cursor: pointer;
 }
 /* details-sheet */
-.details-bar {
+.details-barg {
   width: 820px;
   height: 480px;
   border: 2px solid black;
   border-radius: 20px;
-  position: relative;
-  position: fixed;
-  top: 230px;
-  bottom: 50px;
-  left: 350px;
+  /* position: relative; */
   z-index: 10;
   background-color: white;
 }
 #bar1 {
-  display: none;
+  display: none; 
+ 
 }
 #bar2 {
   display: none;
@@ -216,8 +213,8 @@ main {
 }
 
 .wrong {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   background-image: url("https://imgs.search.brave.com/U8TCmVYTZEd-ehwmCzYyuPAZgM41bnvfVH7OyJxbHRY/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9wbHVz/cG5nLmNvbS9pbWct/cG5nL3BuZy13cm9u/Zy1jcm9zcy1wbmct/aWNvLTUxMi5wbmc");
   background-size: cover;
   position: absolute;
@@ -255,32 +252,7 @@ main {
   color: gray;
   background-color: red;
 }
-.cart-add {
-  width: 140px;
-  height: 30px;
-  border-radius: 15px;
-  font-weight: 700;
-  font-size: 20px;
-  position: absolute;
-  right: 200px;
-  bottom: 60px;
-  cursor: pointer;
-  color: white;
-  background-color: #0a2384;
-}
-.buy-now {
-  width: 110px;
-  height: 30px;
-  border-radius: 15px;
-  font-weight: 700;
-  font-size: 20px;
-  position: absolute;
-  right: 75px;
-  bottom: 60px;
-  color: white;
-  cursor: pointer;
-  background-color: #0a2384;
-}
+
 /* wish/addtocart secs: */
 #threebtn {
   width: 25px;

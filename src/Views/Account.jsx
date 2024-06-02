@@ -1,91 +1,119 @@
-import React from 'react'
-import logo from "../public/wish.png"
-import "../public/account.css"
-import Header from './Header'
-import axios from 'axios'
-import { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import logo from "../public/wish.png";
+import "../public/account.css";
+import Header from './Header';
+import axios from 'axios';
+
 const Account = () => {
   const [data, setData] = useState([]);
-  const [id,setid]=useState();
-  const key="username";
-  const value="pratap";
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/insert', {
-          params: { key, value }
-        });
-        setData(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData();
-  }, []);
-
+  const username = localStorage.getItem("username");
+  const [blur,setBlur]=useState("0px");
   const fetchData = async () => {
     try {
-      const response = await axios.get('/insert', {
-        params: { key, value }
+      const response = await axios.get('http://localhost:3000/wish/fetch', {
+        params: { key: 'username', value: username }
       });
-      setData(response.data);
+      console.log(response.data); // Log response data to console
+      const uniqueData = removeDuplicates(response.data.reverse());
+      setData(uniqueData);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
-  // Function to generate item key based on item type
-  const generateItemKey = (itemType) => {
-    // Example: If itemType is 'rings', key will be 'R1'
-    return itemType.charAt(0).toUpperCase() + (data.filter(item => item.itemType === itemType).length + 1).toString();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  //Add Cart
+  const [successmsg,setSuccessmsg]=useState("none");
+  function close(){
+    setSuccessmsg("none");
+    setBlur("0px");
+  }
+  const removeDuplicates = (dataArray) => {
+    const seen = new Set();
+    return dataArray.filter(item => {
+      const isDuplicate = seen.has(item.itemid);
+      seen.add(item.itemid);
+      return !isDuplicate;
+    });
   };
 
-  const wishdeletefn = async (itemId) => {
+  const wishdeletefn = async (itemId,user) => {
     try {
-      await axios.delete('/insert', { data: { key: "itemid", value: itemId } });
-      // Handle successful deletion
-      console.log('Data deleted successfully.');
-      // Refresh data after deletion
-      const response = await axios.get('/insert', {
-        params: { key, value }
+      await axios.delete('http://localhost:3000/wish/delete', {
+        data: { key: "itemid", value: itemId,username:user }
       });
-      setData(response.data);
+      fetchData(); // Re-fetch data to update the UI
     } catch (error) {
-      // Handle error
       console.error('Error deleting data:', error);
     }
-    fetchData();
   };
 
-  
+  const addToCart = async (id,itemweight,imgSrc,user,Name,type,pricetotal) => {
+    try {
+      await axios.post('http://localhost:3000/add/cart', {
+        itemid: id,  
+      imgsrc: imgSrc, 
+        username:user,
+        itemName:Name,
+        weight:itemweight,
+        total:pricetotal,
+        itemType:type
+      });
+      setSuccessmsg("inline");
+    setBlur("10px")
+      fetchData(); // Optionally re-fetch data to update the UI
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      setSuccessmsg("inline");
+    setBlur("10px")
+    }
+  };
+  const showCart = () => {
+    window.location.href = "/cart";
+  };
+
+  const orderHistoryOpen = () => {
+    window.location.href = "/orderhistory";
+  };
+
   return (
-    <div>
-        <Header/>
-      <section id="accountbar">
-        {/* <img src={nj} className='img sty'/> */}
-        <img src={logo} alt="No image" className='imgsty' />
-        <img src="https://img.icons8.com/?size=80&id=8aHMCM4GMJHR&format=png" alt=""  className='imgsty'/>
-        <img src="https://icons.veryicon.com/128/Business/Pretty%20Office%203/Order%20history.png" alt="" className='imgsty' />
+    <>
+      <Header />
+      <section id="accountbar" style={{filter:`blur(${blur})`}} >
+        <img src={logo} alt="No image" className='imgsty' style={{ backgroundColor: "#C6C3C2", borderRadius: "20px", marginTop: "3px" }} />
+        <img src="https://img.icons8.com/?size=80&id=8aHMCM4GMJHR&format=png" alt="" className='imgsty' onClick={showCart} />
+        <img src="https://icons.veryicon.com/128/Business/Pretty%20Office%203/Order%20history.png" alt="" className='imgsty' onClick={orderHistoryOpen} />
         <img src="https://img.icons8.com/?size=80&id=Eidz314LhGsr&format=png" alt="" className='imgsty' />
       </section>
-      <ul id='wishlist'>
-        {data.map(item=>(
-        <li className='wishitem'> 
-          <img src={item.imgsrc} className='wishimg'/>
-          <span className='itemname'>{item.item}</span>
-          <img src ="https://img.icons8.com/?size=80&id=fP1wKLeDNr9s&format=png"className='add'></img>
-          <img src="https://img.icons8.com/?size=48&id=isPYXsxrQrzW&format=png"className='delete' onClick={() => wishdeletefn(generateItemKey(item.itemType))}></img>
-        </li>
-        ))}
-      </ul>
-      {/* <ul>
-        {data.map(item => (
-          <li key={item._id} className='wish-sty'>
-            <img src={item.src} className=''></img>
+      <ul id='wishlist' style={{filter:`blur(${blur})`}}>
+        {Array.isArray(data) && data.map(item => (
+          <li key={item.itemid} className='wishitem'>
+            <img src={item.imgsrc} className='wishimg' alt={item.item} />
+            <span className='itemname'>{item.itemName}</span>
+            <img
+              src="https://img.icons8.com/?size=80&id=fP1wKLeDNr9s&format=png"
+              className='add'
+              alt="Add"
+              onClick={() => addToCart(item.itemid,item.weight,item.imgsrc,item.username,item.itemName,item.itemType,item.total)}
+            />
+            <img
+              src="https://img.icons8.com/?size=48&id=isPYXsxrQrzW&format=png"
+              className='delete'
+              alt="Delete"
+              onClick={() => wishdeletefn(item.itemid,item.username)}
+            />
           </li>
         ))}
-      </ul> */}
-    </div>
-  )
-}
+      </ul>
+      <section id="successnotify" style={{display:successmsg}}>
+  <div id="successmsg">ADDED TO CART SUCCESSFULLY✔️</div>
+  <a href='/account' id="showcart" onClick={showCart}>Show Cart</a>
+  <button id='close' onClick={close}>Close</button>
+  </section>
+    </>
+  );
+};
 
-export default Account
+export default Account;

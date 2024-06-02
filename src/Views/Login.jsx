@@ -2,12 +2,10 @@ import React from 'react'
 import "../public/style.css";
 import axios from 'axios';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); // Hook to navigate programmatically
-
+    const [invaildmsg,setinvaildmsg]=useState("none")
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
@@ -19,13 +17,14 @@ const Login = () => {
         // You can also check for specific status codes in response
         if (response.data) {
           // Redirect to home page
-          navigate("/home");
+          window.location.href="/home"
+          localStorage.setItem("username",username);
         } else {
           // Handle error case if needed
-          console.error("Signup failed");
+          setinvaildmsg("inline");
         }
         } catch (error) {
-            console.error(error);
+          setinvaildmsg("inline");
         }
     };
   return (
@@ -35,12 +34,12 @@ const Login = () => {
         <div id="logol"></div>
         <h1 id="des">Welcome to Neelima Jewellery</h1>
         <div id="signupl" style={{fontSize:"24px",textDecoration:"none",color:"#0a2384"}}>
-          <a href="/signup" >New to NJ?Signup</a>
+          <a href="/signup"  style={{textDecoration:"none"}} >New to NJ?Signup</a>
         </div>
       </div>
       <div id="sec-2">
         <h1 id="log">LOGIN</h1>
-        <div id='invaildnote'>Invaild Credentials</div>
+        <div id='invaildnote' style={{display:invaildmsg}}>Invaild Credentials</div>
         <form
           onSubmit={handleLogin}
           id="form"
